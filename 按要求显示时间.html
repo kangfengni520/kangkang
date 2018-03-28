@@ -1,0 +1,39 @@
+<!DOCTYE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>按要求显示时间</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/**
+		 * 按要求显示时间
+		 * @param {Number} time 时间戳
+		 * @returns {String} 返回时间差文本
+		 */
+		function contrastTime(time){
+		  var str = '';
+		  var date = new Date();
+		  var nowYear = date.getFullYear();
+		  var oldTime = new Date(time);
+		  var oldYear = oldTime.getFullYear();
+		  var now = Date.parse(date);
+		  var cha = (now - time) / 1000;
+		  if (nowYear == oldYear) {
+		    if (cha > 0 && cha <= 60) {//刚刚
+		      str = '刚刚';
+		    }else if(cha > 60 && cha <= 3600){//多少分钟前 小于1小时
+		      str = parseInt((cha / 60)) +'分钟前';
+		    }else if(cha > 3600 && cha <= 86400){ //24小时以内
+		      str = parseInt((cha / 3600)) +'小时前';
+		    }else{
+		      str = oldTime.getMonth()+1 + '月'+oldTime.getDate() + '日';
+		    }
+		  }else{
+		    str = formatDate(oldTime);
+		  }
+		  return str;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>获取评论里有图片的方法</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/**
+		 * (有评论的页面)公用的获取评论表情
+		 * @param {Number} result 评论内容
+		 */
+		function getEmoji(result) {
+		  var addr="../../img/look/"
+		  var emoji= [{write:"[亲亲]",url:addr+"emoji_kiss.png"},
+		                  {write:"[生病]",url:addr+"emoji_sick.png"},
+		                  {write:"[得意]",url:addr+"emoji_proud.png"},
+		                  {write:"[尴尬]",url:addr+"emoji_embarrassment.png"}, 
+		                  {write:"[可爱]",url:addr+"emoji_cutely.png"}, 
+		                  {write:"[流汗]",url:addr+"emoji_cold_sweat.png"}, 
+		                  {write:"[调皮]",url:addr+"emoji_naughty.png"},
+		                  {write:"[淘气]",url:addr+"emoji_mischief.png"}, 
+		                  {write:"[飞吻]",url:addr+"emoji_throw_kiss.png"}, 
+		                  {write:"[吐舌]",url:addr+"emoji_sticking_tongue.png"}, 
+		                  {write:"[憨笑]",url:addr+"emoji_giggle.png"}, 
+		                  {write:"[微笑]",url:addr+"emoji_smile.png"}, 
+		                  {write:"[愉快]",url:addr+"emoji_happy.png"}, 
+		                  {write:"[严肃]",url:addr+"emoji_solemnity.png"},
+		                  {write:"[叹气]",url:addr+"emoji_suspirious.png"}, 
+		                  {write:"[色色]",url:addr+"emoji_lasciviousness.png"}, 
+		                  {write:"[惊呆]",url:addr+"emoji_stupefaction.png"}, 
+		                  {write:"[难受]",url:addr+"emoji_sadness.png"}, 
+		                  {write:"[哭]",url:addr+"emoji_lacrimation.png"},   
+		                  {write:"[笑哭]",url:addr+"emoji_smile_to_cry.png"}, 
+		                  {write:"[生气]",url:addr+"emoji_angry.png"},
+		                  {write:"[无语]",url:addr+"emoji_speechless.png"}, 
+		                  {write:"[大哭]",url:addr+"emoji_cry.png"}, 
+		                  {write:"[呆滞]",url:addr+"emoji_stagnate.png"}, 
+		                  {write:"[纠结]",url:addr+"emoji_entanglement.png"}
+		              ];
+		  var regexp = /\[[\u4e00-\u9fa5]{0,3}\]/g;//如果此处匹配的文字不同需要改变一下正则
+		  for(var i=0;i<emoji.length;i++){
+		      var rs=null;
+		      while ((rs = regexp.exec(result)) != null)
+		      {   
+		          if(emoji[i].write==rs[0]){
+		              emoji[i].write=emoji[i].write.replace(/\[/g,'\\[');
+		              emoji[i].write=emoji[i].write.replace(/\]/g,'\\]');  
+		              var reg=new RegExp(emoji[i].write,"ig");
+		              result = result.replace(reg,function(kw){
+		                  return "<img class='imgstyle' src='"+emoji[i].url+"' alt=''/>";
+		              }); 
+		          }
+		      }    
+		  }
+		  return result;
+		}
+	</script>
+</body>
+</html>

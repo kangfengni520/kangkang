@@ -1,0 +1,41 @@
+<!DOCTYE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>点击小图看大图</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/**
+		 * 封装了通用的点击小图看大图       
+		 * @param {String} ojbUrl 图片路径
+		 * 在搭美的环信可以看效果
+		 */
+		function bigImage(ojbUrl) {
+		  $('.common_dialog_div').remove();
+		  var div = document.createElement('div');
+		  div.className = 'common_dialog_div';
+		  div.style.display = 'none';
+		  div.innerHTML = '<div class="black_div"></div>'
+		    + '<div class="table_cell">'
+		    + '<div class="white_div2">'
+		    + '<div class="close_btn clearfix">'
+		    + '<img class="fr" src="../../img/icon_delete_04.png">'
+		    + '</div>'
+		    + '<div class="icon_div mt20">'
+		    + '<img src="'+ojbUrl+'">'
+		    + '</div>'
+		    + '</div>';
+		  + '</div>';
+		  $('body').append(div);
+		  $('.common_dialog_div').fadeIn('fast');
+		  $('.common_dialog_div').click(function () {
+		    $(this).hide();
+		    setTimeout(function () {//在mac的谷歌上有点bug 要延迟一下
+		      $('.common_dialog_div').remove();
+		    }, 100)
+		  })
+		}
+	</script>
+</body>
+</html>

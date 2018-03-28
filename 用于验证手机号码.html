@@ -1,0 +1,24 @@
+<!DOCTYE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>用于验证手机号码</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/**
+		 * 用于验证手机号码
+		 * @param {string} phone 待验证手机号码
+		 */
+		function isPhoneRight(phone) {
+		  var reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9]|17[0-9])\d{8}$/;
+		  if (reg.test(phone)) {
+		    return true;
+		  } else {
+		    alert('请输入合法手机号');
+		    return false;
+		  }
+		}
+	</script>
+</body>
+</html>

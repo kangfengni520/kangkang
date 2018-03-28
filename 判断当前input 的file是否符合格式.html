@@ -1,0 +1,61 @@
+<!DOCTYE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>判断当前input 的file是否符合格式</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/**
+		 * 用于判断当前input 的file是否符合格式
+		 * @param {Object} fileObj input输入框自身  this-->fileOBj
+		 * //<input type="file" id="file" onchange="fileInputChange(this)">  在fileInputChange(this)中可用下面的函数做判断，
+		 * @returns {Boolean} 真就是能符合条件，假就是不符合条件
+		 */
+		function checkFile(fileObj) {
+		  var allowExtention = ".jpg,.gif,.png"; //允许上传文件的后缀名document.getElementById("hfAllowPicSuffix").value;  
+		  var extention = fileObj.value.substring(fileObj.value.lastIndexOf(".") + 1).toLowerCase();
+		  var browserVersion = window.navigator.userAgent.toUpperCase();
+		  if (allowExtention.indexOf(extention) == -1) {
+		    failMessage("仅支持" + allowExtention + "为后缀名的文件!");
+		    return false;
+		  } else {
+		    var fileSize = 0;
+		    if (isIE678(9)) {
+		      var filePath = fileObj.value; // 获得上传文件的绝对路径
+		      /**
+		       * ActiveXObject 对象为IE和Opera所兼容的JS对象
+		       * 用法：
+		       *         var newObj = new ActiveXObject( servername.typename[, location])
+		       *         其中newObj是必选项。返回 ActiveXObject对象 的变量名。
+		       *        servername是必选项。提供该对象的应用程序的名称。
+		       *        typename是必选项。要创建的对象的类型或类。
+		       *        location是可选项。创建该对象的网络服务器的名称。
+		       *\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+		        *     Scripting.FileSystemObject 为 IIS 内置组件，用于操作磁盘、文件夹或文本文件，
+		        *    其中返回的 newObj 方法和属性非常的多
+		        *    如：var file = newObj.CreateTextFile("C:\test.txt", true) 第二个参表示目标文件存在时是否覆盖
+		        *    file.Write("写入内容");    file.Close();
+		        */
+		      // GetFile(path) 方法从磁盘获取一个文件并返回。
+		      try {
+		        var file = fileSystem.GetFile(filePath);
+		        fileSize = file.Size / 1024;    // 文件大小，单位：b
+		      } catch (error) {
+		        failMessage(error.message + ',ie的ActiveXObject无法获取到本机文件,请允许阻止内容或者更换高版本浏览器');
+		        // return false;
+		      }
+		    } else {
+		      fileSize = fileObj.files[0].size / 1024;
+		    }
+		    if (fileSize > 2000) {//此处判断是否>2M
+		      failMessage('选取的图片大小不能大于2m,当前图片大小：' + fileSize.toFixed(2) + 'k');
+		      return false;
+		    } else {
+		      return true;
+		    }
+		  }
+		}
+	</script>
+</body>
+</html>
