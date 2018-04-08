@@ -1,0 +1,24 @@
+<!DOCTYE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>trigger</title>
+	<script src='jquery-1.11.0.js'></script>
+</head>
+<body>
+	<button id="go">Go</button> <button id="stop">STOP!</button>
+	<div class="block"></div><button id="go">Go</button> <button id="stop">STOP!</button>
+	<div class="block"></div>
+	<script type="text/javascript">
+		$("#go").click(function(){
+		  $(".block").animate({left: '+200px'}, 5000);
+		});
+
+		// 当点击按钮后停止动画
+		$("#stop").click(function(){
+		  $(".block").stop();
+		});
+
+	</script>
+</body>
+</html>
