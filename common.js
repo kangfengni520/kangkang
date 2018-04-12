@@ -1846,7 +1846,7 @@ function getWebIM(myid,myToken,hisToken,hisName,sendMsg,textType,imgType){
 
 
 /**
- * 环信退出登录
+ * 环信退出登录，打印退出成功
  * @param {String} myToken token:处理后的token
  * @param {String} json 预留的方法入口
  */
